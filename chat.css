@@ -1,0 +1,542 @@
+/* ═══════════════════════════════════════════
+   Kai · EIATEC · Estilos blindados anti‑Wix
+   ═══════════════════════════════════════════ */
+
+/* Reset absoluto del widget */
+#eiabot-chat, #eiabot-chat *,
+#eiabot-min, #eiabot-min * {
+  all: unset;
+  box-sizing: border-box;
+  font-family: 'Century Gothic', CenturyGothic, 'Segoe UI', sans-serif;
+}
+
+/* Variables (no heredadas por culpa de Wix, las ponemos directas) */
+#eiabot-chat, #eiabot-min {
+  --g: #2C6957;
+  --lime: #62B455;
+  --gold: #EAAD26;
+  --t1: #1a2e24;
+  --t2: #4a6a5a;
+  --t3: #8aaa98;
+  --bd: rgba(44, 105, 87, 0.13);
+  --w: #fff;
+  --bg: #f0f6f2;
+}
+
+/* ═══ PASTILLA FLOTANTE (FONDO BLANCO + GRANDE) ═══ */
+#eiabot-min {
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  z-index: 9999999 !important;
+  width: 80px !important;           /* más grande */
+  height: 80px !important;
+  border-radius: 50% !important;
+  background: #fff !important;     /* fondo blanco */
+  box-shadow: 0 8px 28px rgba(0,0,0,0.12), 0 0 0 4px rgba(44,105,87,0.08) !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: none !important;
+  padding: 0 !important;
+  transition: transform 0.2s, box-shadow 0.2s !important;
+}
+#eiabot-min:hover {
+  transform: scale(1.08) !important;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.18), 0 0 0 4px rgba(44,105,87,0.15) !important;
+}
+#eiabot-min img {
+  width: 70% !important;           /* imagen ocupa el 70% del botón */
+  height: 70% !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  display: block !important;
+  /* Sin animación de flotación para que quede limpio sobre blanco */
+}
+#eiabot-min span {
+  display: none !important;
+}
+
+/* Punto de notificación */
+#eiabot-notif {
+  position: absolute !important;
+  top: 2px !important;
+  right: 2px !important;
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 50% !important;
+  background: #C1325B !important;
+  border: 2.5px solid #fff !important;
+  font-size: 0.6rem !important;
+  font-weight: 800 !important;
+  color: #fff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  animation: dotPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+@keyframes dotPop {
+  from { transform: scale(0); }
+  to   { transform: scale(1); }
+}
+
+/* ═══ VENTANA DEL CHAT (más ancha) ═══ */
+#eiabot-chat {
+  position: fixed !important;
+  bottom: 110px !important;        /* un poco más arriba */
+  right: 24px !important;
+  z-index: 9999998 !important;
+  width: 420px !important;         /* más ancho */
+  max-width: calc(100vw - 20px) !important;
+  background: #fff !important;
+  border-radius: 24px !important;
+  box-shadow: 0 24px 70px rgba(44, 105, 87, 0.2), 0 4px 20px rgba(0,0,0,0.07) !important;
+  border: 1px solid rgba(44, 105, 87, 0.13) !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  max-height: 82vh !important;
+  transform: scale(0.88) translateY(22px) !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: all 0.36s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  transform-origin: bottom right !important;
+}
+#eiabot-chat:not(.minimized) {
+  transform: scale(1) translateY(0) !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+/* Header */
+.eiabot-ch {
+  background: linear-gradient(135deg, #1a4d38 0%, #2C6957 55%, #3a8a5c 100%) !important;
+  padding: 16px 18px !important;   /* más espacio */
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  flex-shrink: 0 !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+.eiabot-ch::before {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1' fill='rgba(255,255,255,0.06)'/%3E%3C/svg%3E") !important;
+  background-size: 24px 24px !important;
+  pointer-events: none !important;
+}
+.eiabot-ch-av {
+  width: 52px !important;          /* avatar más grande */
+  height: 52px !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  border: 2.5px solid rgba(255,255,255,0.35) !important;
+  flex-shrink: 0 !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25) !important;
+  position: relative !important;
+}
+.eiabot-ch-av img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+.eiabot-ch-av::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: 2px !important;
+  right: 2px !important;
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 50% !important;
+  background: #62B455 !important;
+  border: 2px solid #1a4d38 !important;
+}
+.eiabot-ch-t {
+  flex: 1 !important;
+  z-index: 1 !important;
+}
+.eiabot-ch-t b {
+  display: block !important;
+  font-size: 0.9rem !important;
+  font-weight: 800 !important;
+  color: #fff !important;
+  letter-spacing: 0.2px !important;
+}
+.eiabot-ch-t span {
+  font-size: 0.62rem !important;
+  color: rgba(255,255,255,0.65) !important;
+  margin-top: 2px !important;
+  display: block !important;
+}
+.eiabot-ch-min {
+  background: rgba(255,255,255,0.12) !important;
+  border: 1px solid rgba(255,255,255,0.18) !important;
+  color: rgba(255,255,255,0.75) !important;
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  font-size: 0.8rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.2s !important;
+  z-index: 1 !important;
+  flex-shrink: 0 !important;
+}
+.eiabot-ch-min:hover {
+  background: rgba(255,255,255,0.22) !important;
+  color: #fff !important;
+  transform: rotate(90deg) !important;
+}
+
+/* Área de mensajes */
+#eiabot-msgs {
+  flex: 1 !important;
+  overflow-y: auto !important;
+  padding: 14px 13px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  scroll-behavior: smooth !important;
+}
+#eiabot-msgs::-webkit-scrollbar { width: 2px !important; }
+#eiabot-msgs::-webkit-scrollbar-thumb { background: rgba(44,105,87,0.13) !important; border-radius: 2px !important; }
+
+/* Burbujas (igual, pero ligeramente más grandes) */
+.eiabot-bm {
+  display: flex !important;
+  gap: 8px !important;
+  align-items: flex-end !important;
+  animation: msgIn 0.3s ease !important;
+}
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+.eiabot-bm-av {
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  flex-shrink: 0 !important;
+  border: 1.5px solid rgba(44,105,87,0.25) !important;
+}
+.eiabot-bm-av img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+.eiabot-bm-bub {
+  background: linear-gradient(135deg, #f2f8f4, #eaf4ed) !important;
+  border: 1px solid rgba(44,105,87,0.12) !important;
+  padding: 11px 15px !important;
+  border-radius: 18px 18px 18px 4px !important;
+  font-size: 0.78rem !important;
+  color: #1a2e24 !important;
+  line-height: 1.68 !important;
+  max-width: 84% !important;
+  box-shadow: 0 2px 8px rgba(44,105,87,0.06) !important;
+}
+
+.eiabot-um {
+  display: flex !important;
+  justify-content: flex-end !important;
+  animation: msgIn 0.3s ease !important;
+}
+.eiabot-um-bub {
+  background: linear-gradient(135deg, #2C6957, #3a8a5c) !important;
+  color: #fff !important;
+  padding: 11px 15px !important;
+  border-radius: 18px 18px 4px 18px !important;
+  font-size: 0.78rem !important;
+  line-height: 1.65 !important;
+  max-width: 78% !important;
+  box-shadow: 0 4px 14px rgba(44,105,87,0.28) !important;
+}
+
+/* Chips de opciones */
+.eiabot-opts {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+  padding: 2px 0 2px 40px !important;
+  animation: msgIn 0.35s ease !important;
+}
+.eiabot-opt {
+  background: #fff !important;
+  border: 1.5px solid rgba(44,105,87,0.22) !important;
+  color: #2C6957 !important;
+  padding: 7px 15px !important;
+  border-radius: 20px !important;
+  font-size: 0.68rem !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  transition: all 0.22s !important;
+  font-family: inherit !important;
+  box-shadow: 0 2px 6px rgba(44,105,87,0.07) !important;
+}
+.eiabot-opt:hover {
+  background: #2C6957 !important;
+  color: #fff !important;
+  border-color: #2C6957 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 5px 14px rgba(44,105,87,0.28) !important;
+}
+
+/* Escritura */
+.eiabot-typing {
+  display: flex !important;
+  gap: 8px !important;
+  align-items: flex-end !important;
+  animation: msgIn 0.3s ease !important;
+}
+.eiabot-typing-bub {
+  background: linear-gradient(135deg, #f2f8f4, #eaf4ed) !important;
+  border: 1px solid rgba(44,105,87,0.12) !important;
+  padding: 12px 16px !important;
+  border-radius: 18px 18px 18px 4px !important;
+  display: flex !important;
+  gap: 4px !important;
+  align-items: center !important;
+}
+.eiabot-td {
+  width: 7px !important;
+  height: 7px !important;
+  border-radius: 50% !important;
+  background: #8aaa98 !important;
+  animation: td 0.9s infinite ease-in-out !important;
+}
+.eiabot-td:nth-child(2) { animation-delay: 0.18s !important; }
+.eiabot-td:nth-child(3) { animation-delay: 0.36s !important; }
+@keyframes td {
+  0%, 80%, 100% { transform: scale(0.7); opacity: 0.3; }
+  40%           { transform: scale(1.15); opacity: 1; }
+}
+
+/* Formulario (igual, solo un poco más espacioso) */
+.eiabot-form {
+  background: linear-gradient(135deg, #f8fbf9, #f2f8f4) !important;
+  border: 1.5px solid rgba(44,105,87,0.14) !important;
+  border-radius: 18px !important;
+  padding: 16px !important;
+  margin: 6px 0 6px 40px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  box-shadow: 0 4px 16px rgba(44,105,87,0.07) !important;
+  animation: msgIn 0.35s ease !important;
+}
+.eiabot-form-ttl {
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  color: #1a2e24 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+.eiabot-form-ttl i { color: #2C6957 !important; }
+
+.eiabot-fg {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+}
+.eiabot-fg label {
+  font-size: 0.6rem !important;
+  font-weight: 800 !important;
+  color: #8aaa98 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.8px !important;
+}
+.eiabot-fi-wrap {
+  position: relative !important;
+}
+.eiabot-fi-wrap i {
+  position: absolute !important;
+  left: 12px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  color: #8aaa98 !important;
+  font-size: 0.7rem !important;
+  pointer-events: none !important;
+}
+.eiabot-fi-wrap.ta-wrap i {
+  top: 12px !important;
+  transform: none !important;
+}
+.eiabot-fg input,
+.eiabot-fg textarea {
+  width: 100% !important;
+  padding: 9px 12px 9px 34px !important;
+  border-radius: 10px !important;
+  border: 1.5px solid rgba(44,105,87,0.13) !important;
+  background: #fff !important;
+  font-family: inherit !important;
+  font-size: 0.74rem !important;
+  color: #1a2e24 !important;
+  outline: none !important;
+  transition: border-color 0.2s, box-shadow 0.2s !important;
+  resize: none !important;
+}
+.eiabot-fg input:focus,
+.eiabot-fg textarea:focus {
+  border-color: #2C6957 !important;
+  box-shadow: 0 0 0 3px rgba(44,105,87,0.09) !important;
+}
+.eiabot-fg input::placeholder,
+.eiabot-fg textarea::placeholder {
+  color: #8aaa98 !important;
+}
+.eiabot-fg textarea {
+  min-height: 62px !important;
+  padding-left: 34px !important;
+}
+
+.eiabot-form-btns {
+  display: flex !important;
+  gap: 8px !important;
+  margin-top: 4px !important;
+}
+.eiabot-btn {
+  flex: 1 !important;
+  padding: 10px 8px !important;
+  border-radius: 12px !important;
+  border: none !important;
+  font-weight: 800 !important;
+  font-size: 0.7rem !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  transition: all 0.22s !important;
+  letter-spacing: 0.2px !important;
+}
+.eiabot-btn:hover {
+  transform: translateY(-2px) !important;
+  filter: brightness(1.08) !important;
+}
+.eiabot-btn-wa {
+  background: #25D366 !important;
+  color: #fff !important;
+  box-shadow: 0 4px 14px rgba(37,211,102,0.3) !important;
+}
+.eiabot-btn-em {
+  background: #2C6957 !important;
+  color: #fff !important;
+  box-shadow: 0 4px 14px rgba(44,105,87,0.3) !important;
+}
+
+.eiabot-form-hint {
+  font-size: 0.6rem !important;
+  color: #8aaa98 !important;
+  text-align: center !important;
+  margin-top: -2px !important;
+}
+
+/* Divisor */
+.eiabot-div {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 0 2px !important;
+}
+.eiabot-div span {
+  font-size: 0.6rem !important;
+  color: #8aaa98 !important;
+  font-weight: 700 !important;
+  white-space: nowrap !important;
+}
+.eiabot-div::before,
+.eiabot-div::after {
+  content: '' !important;
+  flex: 1 !important;
+  height: 1px !important;
+  background: rgba(44,105,87,0.13) !important;
+}
+
+/* System message */
+.eiabot-sys {
+  text-align: center !important;
+  font-size: 0.62rem !important;
+  color: #8aaa98 !important;
+  padding: 6px 12px !important;
+}
+
+/* Reacción emoji */
+.eiabot-react {
+  font-size: 1.1rem !important;
+  animation: reactPop 0.4s cubic-bezier(0.34,1.56,0.64,1) !important;
+  display: inline-block !important;
+}
+@keyframes reactPop {
+  from { transform: scale(0) rotate(-20deg); }
+  to   { transform: scale(1) rotate(0); }
+}
+
+/* Input row */
+.eiabot-ci {
+  border-top: 1px solid rgba(44,105,87,0.13) !important;
+  padding: 12px 14px !important;
+  display: flex !important;
+  gap: 8px !important;
+  align-items: center !important;
+  flex-shrink: 0 !important;
+  background: #fafcfa !important;
+}
+.eiabot-ci input {
+  flex: 1 !important;
+  padding: 10px 16px !important;
+  border-radius: 22px !important;
+  border: 1.5px solid rgba(44,105,87,0.13) !important;
+  background: #fff !important;
+  font-family: inherit !important;
+  font-size: 0.76rem !important;
+  color: #1a2e24 !important;
+  outline: none !important;
+  transition: border-color 0.2s, box-shadow 0.2s !important;
+}
+.eiabot-ci input:focus {
+  border-color: #2C6957 !important;
+  box-shadow: 0 0 0 3px rgba(44,105,87,0.09) !important;
+}
+.eiabot-ci input::placeholder {
+  color: #8aaa98 !important;
+}
+.eiabot-ci-send {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  border: none !important;
+  background: linear-gradient(135deg, #2C6957, #62B455) !important;
+  color: #fff !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 0.8rem !important;
+  transition: all 0.22s !important;
+  flex-shrink: 0 !important;
+  box-shadow: 0 4px 12px rgba(44,105,87,0.3) !important;
+}
+.eiabot-ci-send:hover {
+  transform: scale(1.1) rotate(-10deg) !important;
+  box-shadow: 0 6px 18px rgba(44,105,87,0.4) !important;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  #eiabot-chat {
+    right: 10px !important;
+    bottom: 100px !important;
+    width: calc(100vw - 20px) !important;
+  }
+  #eiabot-min {
+    right: 14px !important;
+    bottom: 14px !important;
+  }
+}
